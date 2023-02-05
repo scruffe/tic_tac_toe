@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Tic Tac Toe</string>
+    <string name="app_name">Game2</string>
     <string name="button_play">Play</string>
     <string name="button_restart">Restart</string>
     <string name="coins">coins</string>
@@ -14,7 +14,7 @@
     <string name="bot_r">bottom right</string>
     <string name="game_over">Game Over!</string>
     <string name="match_draw">Match Draw</string>
-    <string name="first_turn_text"> </string>
+    <string name="first_turn_text">Ready?</string>
 
 
 </resources>
