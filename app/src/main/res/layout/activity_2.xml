@@ -9,6 +9,16 @@
     tools:context=".Activity2">
 
     <!--title text-->
+    <TextView
+        android:id="@+id/timer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/placeholder_time"
+        android:padding="10dp"
+        android:textColor="@color/black"
+        android:textAlignment="center"
+        android:textSize="60sp"
+        app:layout_constraintTop_toBottomOf="@id/status"/>
 
     <!--image of the grid-->
 

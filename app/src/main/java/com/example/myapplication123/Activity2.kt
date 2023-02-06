@@ -1,6 +1,7 @@
 package com.example.myapplication123
 
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
@@ -22,12 +23,28 @@ class Activity2 : AppCompatActivity() {
     private var difficulty: Int = 5
     private var gamemode: Int = 2 //1 = survival time attack
     private var checkpoint: Int = 0
+    private var pause: Boolean = false
+    private val timer = object: CountDownTimer(30000, 1000) {
 
+        // Callback function, fired on regular interval
+        override fun onTick(millisUntilFinished: Long) {
+            findViewById<TextView>(R.id.timer).text = "" + millisUntilFinished / 1000
+        }
+
+        // Callback function, fired
+        // when the time is up
+        override fun onFinish() {
+            findViewById<TextView>(R.id.timer).text = "done!"
+            pause = true
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_2)
         findViewById<TextView>(R.id.status).text = java.lang.String.format(resources.getString(R.string.first_turn_text))
+
+
     }
 
     fun missClick(view: View, status: TextView){
@@ -35,18 +52,16 @@ class Activity2 : AppCompatActivity() {
         if (score > highscore){
             highscore = score
         }
-        var x = difficulty-lives
+        var x = (difficulty-lives)/2
         if (x<0){x=1}
         score -= (score/10) * x
         if (score<0){
             score = 0
         }
-        updateScore(status)
-
         if (lives < 0){
-            restartGame(view)
             return
         }
+        updateScore(status)
 
         if (counter == 0){
             counter = 1
@@ -66,13 +81,27 @@ class Activity2 : AppCompatActivity() {
         val imgTag = Integer.parseInt(view.tag.toString())
         val imgViewOld = findViewById<ImageView>((view.id))
         val gs_id = gameState[imgTag]
+
+        if (counter==0){// time count down for 30 seconds,
+            // with 1 second as countDown interval
+
+            timer.start()
+        }
+
+        if (pause){
+            timer.cancel()
+            return
+        }
+        if (lives<0){return}
         stake = (score/10) * (8-lives)
         updateScore(status)
-        if (score>100){checkpoint=6}
+        if (score>80){checkpoint=6}
         else if(score>50&&checkpoint<5){checkpoint=5}
         else if(score>30&&checkpoint<3){checkpoint=3}
         else if(score>20&&checkpoint<2){checkpoint=2}
         else if(score>10&&checkpoint<1){checkpoint=1}
+
+
         if (gamemode==2){
             if (gs_id == 2){
                 // hit an X
@@ -85,6 +114,10 @@ class Activity2 : AppCompatActivity() {
                 missClick(view, status)
                 return
             }
+            var hit: Boolean = false
+            if (gs_id == 1||gs_id == 3||gs_id == 4){
+                hit = true
+            }
             if (counter == 0){
                 score = checkpoint * 10
             }
@@ -95,11 +128,11 @@ class Activity2 : AppCompatActivity() {
             score++
             updateScore(status)
             counter++
-            if (counter == 300){
-                // end of game counter
-                restartGame(view)
-                return
-            }
+//            if (counter == 300){
+//                // end of game counter
+//                restartGame(view)
+//                return
+//            }
             val blue = ContextCompat.getColor(applicationContext, R.color.o_color)
             val black = ContextCompat.getColor(applicationContext, R.color.black)
             val red = ContextCompat.getColor(applicationContext, R.color.x_color)
@@ -118,42 +151,30 @@ class Activity2 : AppCompatActivity() {
                     r1 = Random().nextInt(view_ids.size)
                 }
             }
-            var color1 = if (Random().nextInt(3)==1 && checkpoint>3){red} else { blue}
-            gameState[r1] = 1
-            findViewById<ImageView>(view_ids[r1]).setImageResource(circle)
-            findViewById<ImageView>(view_ids[r1]).rotation = (Random().nextInt(4)*45).toFloat()
-            findViewById<ImageView>(view_ids[r1]).setColorFilter(color1)
+            val color1 = if (Random().nextInt(3)==1 && checkpoint>3){red} else { blue}
+            drawImg(r1, view_ids, circle, color1,1)
             //star
             val starR = Random().nextInt(view_ids.size)
             if (gameState[starR]==0 && checkpoint>5){
-                findViewById<ImageView>(view_ids[starR]).setImageResource(circle)
-                findViewById<ImageView>(view_ids[starR]).rotation = (Random().nextInt(4)*45).toFloat()
-                findViewById<ImageView>(view_ids[starR]).setColorFilter(black)
-
-                gameState[starR] = 1
+                drawImg(starR, view_ids, circle, black,1)
             }
 
             //cross
-            val imgs2 = intArrayOf(R.drawable.x1, R.drawable.x2)
+            val imgs2 = intArrayOf(R.drawable.x1, R.drawable.x2, R.drawable.x)
             val cross = imgs2[Random().nextInt(imgs2.size)]
             var r2 = Random().nextInt(view_ids.size)
             if (r2 == r1){
                 if (r2==8) {r2--} else {r2++}
             }
 
-            var color2 = if (Random().nextInt(5)==1 && score>10){blue} else {red}
+            val color2 = if (Random().nextInt(5)==1 && score>10){blue} else {red}
+            var img = 0
             if (Random().nextInt(3)!=1 && counter!=1){
-                if (gameState[r2] == 2){
-                    findViewById<ImageView>(view_ids[r2]).setImageResource(0)
-                    gameState[r2] = 0
-                }else{
-                    findViewById<ImageView>(view_ids[r2]).setImageResource(cross)
-                    gameState[r2] = 2
-
+                if (gameState[r2] != 2){
+                    img = cross
                 }
+                drawImg(r2, view_ids, img, color2, 2)
             }
-            findViewById<ImageView>(view_ids[r2]).setColorFilter(color2)
-
         }
 
         ///////////////////////// SURVIVAL
@@ -193,10 +214,19 @@ class Activity2 : AppCompatActivity() {
             // mark new position
             gameState[r] = 1
         }
+    }
 
-
-
-
+    private fun drawImg(
+        rand: Int,
+        view_ids: IntArray,
+        img: Int,
+        black: Int,
+        id: Int
+    ) {
+        gameState[rand] = id
+        findViewById<ImageView>(view_ids[rand]).setImageResource(img)
+        findViewById<ImageView>(view_ids[rand]).rotation = (Random().nextInt(4) * 45).toFloat()
+        findViewById<ImageView>(view_ids[rand]).setColorFilter(black)
     }
 
     fun restartGame(view: View){
@@ -229,67 +259,5 @@ class Activity2 : AppCompatActivity() {
         findViewById<ImageView>(R.id.right_line).visibility = View.INVISIBLE
 
         status.text = resources.getString(R.string.first_turn_text)
-    }
-
-    private fun drawLine(id: Int, color: Int,degrees: Float){
-        val line = findViewById<ImageView>(id)
-        line.visibility = View.VISIBLE
-        line.setColorFilter(color)
-        line.rotation = degrees
-    }
-
-    private fun threeInARow(i: Int, activePlayer: Int): Boolean{
-        val color = if (activePlayer == 3){
-            ContextCompat.getColor(applicationContext, R.color.o_color)
-        } else{
-            ContextCompat.getColor(applicationContext, R.color.x_color)
-        }
-        val row1 = gameState[0]+gameState[1]+gameState[2]
-        val row2 = gameState[3]+gameState[4]+gameState[5]
-        val row3 = gameState[6]+gameState[7]+gameState[8]
-
-        val col1 = gameState[0]+gameState[3]+gameState[6]
-        val col2 = gameState[1]+gameState[4]+gameState[7]
-        val col3 = gameState[2]+gameState[5]+gameState[8]
-
-        val dia1 = gameState[0]+gameState[4]+gameState[8]
-        val dia2 = gameState[2]+gameState[4]+gameState[6]
-
-        when {
-            row1 == i -> {
-                drawLine(R.id.top_line, color, 0.0F)
-                return true
-            }
-            row2 == i -> {
-                drawLine(R.id.center_line, color, 0.0F)
-                return true
-            }
-            row3 == i -> {
-                drawLine(R.id.bottom_line, color, 0.0F)
-                return true
-            }
-            col1 == i -> {
-                drawLine(R.id.left_line, color, 90.0F)
-                return true
-            }
-            col2 == i -> {
-                drawLine(R.id.center_line, color, 90.0F)
-                return true
-            }
-            col3 == i -> {
-                drawLine(R.id.right_line, color, 90.0F)
-                return true
-            }
-            dia1 == i -> {
-                drawLine(R.id.center_line, color, 45.0F)
-                return true
-            }
-            dia2 == i -> {
-                drawLine(R.id.center_line, color, 135.0F)
-                return true
-            }
-            else -> return false
-        }
-
     }
 }
