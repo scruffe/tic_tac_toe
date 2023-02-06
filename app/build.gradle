@@ -7,11 +7,11 @@ android {
     compileSdk 32
 
     defaultConfig {
-        applicationId "com.example.myapplication123"
+        applicationId "com.scruffe.chasexo"
         minSdk 28
         targetSdk 32
-        versionCode 1
-        versionName "1.0"
+        versionCode 3
+        versionName "1.0.2"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
