@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Game2</string>
+    <string name="app_name">Scruffe_Alpha_test</string>
     <string name="button_play">Play</string>
     <string name="button_restart">Restart</string>
     <string name="coins">coins</string>
