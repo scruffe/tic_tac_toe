@@ -1,11 +1,13 @@
 package com.example.myapplication123
 
+import android.media.MediaPlayer
+import android.media.MediaPlayer.OnCompletionListener
+import android.media.SoundPool
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
-
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import java.util.*
@@ -24,6 +26,11 @@ class Activity2 : AppCompatActivity() {
     private var gamemode: Int = 2 //1 = survival time attack
     private var checkpoint: Int = 0
     private var pause: Boolean = false
+    private var soundPool: SoundPool? = null
+    private val soundId = 1
+    private var muteSFX: Boolean = false
+    private var BgMusic: MediaPlayer? = null
+    private var musicPlaying: Boolean = false
     private val timer = object: CountDownTimer(30000, 1000) {
 
         // Callback function, fired on regular interval
@@ -59,6 +66,7 @@ class Activity2 : AppCompatActivity() {
             score = 0
         }
         if (lives < 0){
+            playSound(R.raw.lose2)
             return
         }
         updateScore(status)
@@ -80,42 +88,67 @@ class Activity2 : AppCompatActivity() {
         val status = findViewById<TextView>(R.id.status)
         val imgTag = Integer.parseInt(view.tag.toString())
         val imgViewOld = findViewById<ImageView>((view.id))
-        val gs_id = gameState[imgTag]
+        val gs_id = gameState[imgTag]//2 5 9 12
+        val pops = intArrayOf(R.raw._pop,R.raw.pop1//,R.raw.pop2
+            ,R.raw.pop3
+            ,R.raw.pop4//,R.raw.pop5
+            ,R.raw.pop6,R.raw.pop7,R.raw.pop8//,R.raw.pop9
+            ,R.raw.pop10,R.raw.pop11//,R.raw.pop12
+            ,R.raw.pop13,R.raw.pop14)
 
-        if (counter==0){// time count down for 30 seconds,
-            // with 1 second as countDown interval
-
-            timer.start()
-        }
-
-        if (pause){
-            timer.cancel()
-            return
-        }
-        if (lives<0){return}
+//        if (counter==0){// time count down for 30 seconds,
+//            // with 1 second as countDown interval
+//
+//            timer.start()
+//        }
+//
+//        if (pause){
+//            timer.cancel()
+//            return
+//        }
+        if (lives<0){
+            playSound(R.raw.lose2)
+            return}
         stake = (score/10) * (8-lives)
         updateScore(status)
-        if (score>80){checkpoint=6}
-        else if(score>50&&checkpoint<5){checkpoint=5}
-        else if(score>30&&checkpoint<3){checkpoint=3}
-        else if(score>20&&checkpoint<2){checkpoint=2}
-        else if(score>10&&checkpoint<1){checkpoint=1}
+        if (score>80&&checkpoint<6){
+            checkpoint=6
+            playSound(R.raw.lvl_up)}
+        else if(score>50&&checkpoint<5){
+            checkpoint=5
+            playSound(R.raw.lvl_up)}
+        else if(score>30&&checkpoint<3){
+            checkpoint=3
+            playSound(R.raw.lvl_up)}
+        else if(score>20&&checkpoint<2){
+            checkpoint=2
+            playSound(R.raw.lvl_up)}
+        else if(score>10&&checkpoint<1){
+            checkpoint=1
+            playSound(R.raw.lvl_up2)}
 
 
         if (gamemode==2){
             if (gs_id == 2){
+
+                playSound(R.raw.kruisje)
+//                Toast.makeText(this, "Playing sound. . . .", Toast.LENGTH_SHORT).show()
                 // hit an X
+
                 missClick(view, status)
                 return
 
             }
             if (gs_id == 0 && counter!=0){
+                playSound(R.raw.mis)
                 // missed target
                 missClick(view, status)
                 return
             }
             var hit: Boolean = false
             if (gs_id == 1||gs_id == 3||gs_id == 4){
+                val pop = pops[Random().nextInt(pops.size)]
+                playSound(pop)
                 hit = true
             }
             if (counter == 0){
@@ -160,7 +193,7 @@ class Activity2 : AppCompatActivity() {
             }
 
             //cross
-            val imgs2 = intArrayOf(R.drawable.x1, R.drawable.x2, R.drawable.x)
+            val imgs2 = intArrayOf(R.drawable.x1, R.drawable.x2)
             val cross = imgs2[Random().nextInt(imgs2.size)]
             var r2 = Random().nextInt(view_ids.size)
             if (r2 == r1){
@@ -169,11 +202,13 @@ class Activity2 : AppCompatActivity() {
 
             val color2 = if (Random().nextInt(5)==1 && score>10){blue} else {red}
             var img = 0
+            var id = 0
             if (Random().nextInt(3)!=1 && counter!=1){
                 if (gameState[r2] != 2){
                     img = cross
+                    id = 2
                 }
-                drawImg(r2, view_ids, img, color2, 2)
+                drawImg(r2, view_ids, img, color2, id)
             }
         }
 
@@ -216,6 +251,14 @@ class Activity2 : AppCompatActivity() {
         }
     }
 
+    private fun playSound(file: Int) {
+        if (!muteSFX){
+            val mSound = MediaPlayer.create(this, file)
+            mSound.start()
+            mSound.setOnCompletionListener(OnCompletionListener { mp -> mp.release() })
+        }
+    }
+
     private fun drawImg(
         rand: Int,
         view_ids: IntArray,
@@ -231,6 +274,7 @@ class Activity2 : AppCompatActivity() {
 
     fun restartGame(view: View){
         val status = findViewById<TextView>(R.id.status)
+        playSound(R.raw.restart2)
         score++
         updateScore(status)
 
@@ -259,5 +303,14 @@ class Activity2 : AppCompatActivity() {
         findViewById<ImageView>(R.id.right_line).visibility = View.INVISIBLE
 
         status.text = resources.getString(R.string.first_turn_text)
+    }
+
+    fun muteSoundEffects(view: View) {
+        var img = 0
+        if (muteSFX){
+            img = R.drawable.unmute
+        } else{img = R.drawable.mute}
+        findViewById<ImageView>(R.id.mute_button).setBackgroundResource(img)
+        muteSFX = !muteSFX
     }
 }

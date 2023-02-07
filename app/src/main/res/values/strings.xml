@@ -15,7 +15,8 @@
     <string name="game_over">Game Over!</string>
     <string name="match_draw">Match Draw</string>
     <string name="first_turn_text">Ready?</string>
-    <string name="placeholder_time">00:00:00</string>
+    <string name="mute">mute audio</string>
+    <string name="placeholder_time"> </string>
 
 
 </resources>

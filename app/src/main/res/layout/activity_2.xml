@@ -256,10 +256,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/status">
 
-        <Space
+        <ImageButton
+            android:id="@+id/mute_button"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1" />
+            android:layout_marginEnd="16dp"
+            android:layout_weight="1"
+            android:background="@drawable/unmute"
+            android:contentDescription="@string/mute"
+            android:onClick="muteSoundEffects" />
 
         <Space
             android:layout_width="match_parent"
