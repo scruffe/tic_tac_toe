@@ -25,7 +25,14 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun playButton(view: View) {
+
         val intent = Intent(this, Activity2::class.java).apply{}
+        startActivity(intent)
+    }
+
+    fun playButton2(view: View) {
+
+        val intent = Intent(this, Survival::class.java).apply{}
         startActivity(intent)
     }
 }

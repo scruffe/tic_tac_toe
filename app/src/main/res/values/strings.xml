@@ -16,7 +16,25 @@
     <string name="match_draw">Match Draw</string>
     <string name="first_turn_text">Ready?</string>
     <string name="mute">mute audio</string>
-    <string name="placeholder_time"> </string>
+    <string name="placeholder_time">00</string>
+    <string name="title_activity_survival">Survival</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="title_activity_suvival">suvival</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="score_text">1000</string>
+    <string name="highscore_text">2500</string>
+    <string name="ready">ready?</string>
+    <string name="score">SCORE</string>
+    <string name="highscore">HIGHSCORE</string>
+    <string name="gamemode"> </string>
 
 
 </resources>

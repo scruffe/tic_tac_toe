@@ -8,23 +8,15 @@
     android:background="@drawable/paper2"
     tools:context=".MainActivity">
 
-    <Button
-        android:id="@+id/button"
+    <TextView
+        android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/playbutton2"
-
-        android:contentDescription="@string/button_play"
-        android:onClick="playButton"
-        android:textAlignment="center"
-        android:textAllCaps="false"
-        android:textColor="@color/black"
-        android:typeface="normal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.45" />
+        android:layout_marginBottom="16dp"
+        android:text="SURVIVAL"
+        android:textSize="24sp"
+        ads:layout_constraintBottom_toTopOf="@+id/button"
+        tools:layout_editor_absoluteX="151dp" />
 
     <com.google.android.gms.ads.AdView
         android:id="@+id/adView"
@@ -38,6 +30,54 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/playbutton2"
+
+        android:contentDescription="@string/button_play"
+        android:onClick="playButton"
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        android:textColor="@color/black"
+        android:typeface="normal"
+        ads:layout_constraintTop_toBottomOf="@+id/button2"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.45" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/playbutton2"
+
+        android:contentDescription="@string/button_play"
+        android:onClick="playButton2"
+
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        android:textColor="@color/black"
+        android:typeface="normal"
+        ads:layout_constraintBottom_toTopOf="@+id/button"
+        ads:layout_constraintEnd_toEndOf="parent"
+        ads:layout_constraintStart_toStartOf="parent"
+        ads:layout_constraintTop_toTopOf="parent"
+        ads:layout_constraintVertical_bias="0.45" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
+        android:text="TIMER"
+        android:textSize="24sp"
+        ads:layout_constraintBottom_toTopOf="@+id/button2"
+        tools:layout_editor_absoluteX="170dp" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

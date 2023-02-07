@@ -8,100 +8,150 @@
     android:background="@drawable/paper4"
     tools:context=".Activity2">
 
-    <!--title text-->
-    <TextView
-        android:id="@+id/timer"
+    <LinearLayout
+        android:layout_marginTop="80dp"
+        android:layout_marginBottom="10dp"
+        android:id="@+id/header2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/placeholder_time"
-        android:padding="10dp"
-        android:textColor="@color/black"
-        android:textAlignment="center"
-        android:textSize="60sp"
-        app:layout_constraintTop_toBottomOf="@id/status"/>
+        android:orientation="horizontal"
+        tools:visibility="visible"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/game_box"
+
+        >
+        <FrameLayout
+            android:id="@+id/gm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20sp">
+            <LinearLayout
+                android:id="@+id/linearLayoutgm"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                tools:visibility="visible"
+
+                >
+                <TextView
+                    android:id="@+id/gamemode_header"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="@string/gamemode"
+                    android:textStyle="bold"
+                    android:layout_marginStart="10dp"
+                    android:textColor="@color/black"
+                    android:textAlignment="center"
+                    android:textSize="11sp" />
+                <TextView
+                    android:id="@+id/timer"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="@string/placeholder_time"
+                    android:layout_marginStart="10dp"
+                    android:textColor="@color/black"
+                    android:textSize="18sp" />
+            </LinearLayout></FrameLayout>
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginStart="120dp">
+
+            <LinearLayout
+                android:id="@+id/linearLayouths"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                tools:visibility="visible"
+
+                >
+
+                <TextView
+                    android:id="@+id/highscore_header"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+
+                    android:text="@string/highscore"
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    android:textSize="11sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/highscore"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginEnd="2dp"
+                    android:text="@string/highscore_text"
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    android:textSize="18sp" />
+            </LinearLayout>
+        </FrameLayout>
+        <FrameLayout
+            android:id="@+id/fs"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:id="@+id/linearLayoutscore"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="10dp"
+                android:orientation="vertical"
+                tools:visibility="visible"
+                >
+                <TextView
+                    android:id="@+id/score_header"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="@string/score"
+                    android:textStyle="bold"
+
+                    android:textColor="@color/black"
+                    android:textAlignment="center"
+                    android:textSize="11sp" />
+                <TextView
+                    android:id="@+id/score"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="@string/score_text"
+                    android:layout_marginEnd="2dp"
+                    android:textColor="@color/black"
+                    android:textAlignment="center"
+                    android:textSize="18sp"
+                    />
+            </LinearLayout>
+        </FrameLayout>
+    </LinearLayout>
+
+
+
+    <!--title text-->
+
 
     <!--image of the grid-->
 
     <FrameLayout
         android:id="@+id/game_box"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:background="@drawable/grid2"
+        android:layout_width="0sp"
+        android:layout_height="0sp"
+        android:padding="20sp"
         android:scaleX="0.9"
         android:scaleY="0.9"
+        app:layout_constraintBottom_toTopOf="@+id/footer"
         app:layout_constraintDimensionRatio="H,1:1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/header2">
 
-        <LinearLayout
-            android:id="@+id/horizontal_lines"
+        <ImageView
+            android:id="@+id/imageViewBack"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            tools:ignore="ContentDescription"
-            tools:visibility="gone">
-
-            <ImageView
-                android:id="@+id/top_line"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:visibility="invisible"
-                app:srcCompat="@drawable/line" />
-
-            <ImageView
-                android:id="@+id/center_line"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:visibility="invisible"
-                app:srcCompat="@drawable/line" />
-
-            <ImageView
-                android:id="@+id/bottom_line"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:visibility="invisible"
-                app:srcCompat="@drawable/line" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/vertical_lines"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal"
-            tools:ignore="ContentDescription"
-            tools:visibility="gone">
-
-            <ImageView
-                android:id="@+id/left_line"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:rotation="90"
-                android:scaleX="3"
-                android:scaleY="4"
-                android:visibility="invisible"
-                app:srcCompat="@drawable/line" />
-
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1" />
-
-            <ImageView
-                android:id="@+id/right_line"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:rotation="90"
-                android:scaleX="3"
-                android:scaleY="5"
-                android:visibility="invisible"
-                app:srcCompat="@drawable/line" />
-        </LinearLayout>
+            android:background="@drawable/grid2" />
 
         <LinearLayout
             android:id="@+id/linearLayout"
@@ -237,34 +287,40 @@
         android:id="@+id/status"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:layout_marginBottom="200dp"
-        android:textSize="28sp"
+        android:textSize="48sp"
         android:textStyle="italic"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/game_box"
+        app:layout_constraintEnd_toEndOf="@id/game_box"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/game_box" />
+        app:layout_constraintTop_toTopOf="@id/game_box" />
+
+    <ImageButton
+        android:id="@+id/mute_button"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_weight="1"
+        android:background="@drawable/unmute"
+        android:contentDescription="@string/mute"
+        android:onClick="muteSoundEffects"
+        android:padding="10sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:id="@+id/footer"
+        android:layout_width="0sp"
+        android:layout_height="0sp"
+
         android:orientation="horizontal"
+        android:layout_marginBottom="15sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintDimensionRatio="H,6:1"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/status">
+        app:layout_constraintStart_toStartOf="parent">
 
-        <ImageButton
-            android:id="@+id/mute_button"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginEnd="16dp"
-            android:layout_weight="1"
-            android:background="@drawable/unmute"
-            android:contentDescription="@string/mute"
-            android:onClick="muteSoundEffects" />
+
 
         <Space
             android:layout_width="match_parent"
@@ -275,12 +331,14 @@
             android:id="@+id/restart_button"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginEnd="16dp"
+            android:layout_marginEnd="16sp"
             android:layout_weight="1"
+
             android:background="@drawable/restart2"
             android:contentDescription="@string/button_restart"
             android:onClick="restartGame" />
     </LinearLayout>
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
