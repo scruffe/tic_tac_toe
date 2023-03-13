@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/paper4"
+    android:background="@drawable/bg9"
     tools:context=".Activity2">
 
     <LinearLayout
@@ -65,9 +65,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                tools:visibility="visible"
 
-                >
+                tools:visibility="visible">
 
                 <TextView
                     android:id="@+id/highscore_header"
@@ -130,7 +129,7 @@
 
 
     <!--title text-->
-
+    <!--images of the grid boxes-->
 
     <!--image of the grid-->
 
@@ -141,7 +140,7 @@
         android:padding="20sp"
         android:scaleX="0.9"
         android:scaleY="0.9"
-        app:layout_constraintBottom_toTopOf="@+id/footer"
+        app:layout_constraintBottom_toTopOf="@+id/restart_button"
         app:layout_constraintDimensionRatio="H,1:1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -151,9 +150,10 @@
             android:id="@+id/imageViewBack"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/grid2" />
+            android:visibility="invisible" />
 
         <LinearLayout
+            android:contentDescription="@string/game_box"
             android:id="@+id/linearLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -167,19 +167,23 @@
                 android:layout_weight="1"
                 android:orientation="horizontal">
 
-                <!--images of the grid boxes-->
 
-                <ImageView
+                <pl.droidsonroids.gif.GifImageView
+
                     android:id="@+id/imageView0"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:contentDescription="@string/top_l"
+                    android:foregroundTintMode="src_in"
                     android:onClick="playerTap"
                     android:padding="20sp"
-                    android:tag="0" />
+                    android:tag="0"
+                    android:visibility="visible"
+                    app:srcCompat="@drawable/bubble2" />
 
-                <ImageView
+                <pl.droidsonroids.gif.GifImageView
+
                     android:id="@+id/imageView1"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -189,7 +193,8 @@
                     android:padding="20sp"
                     android:tag="1" />
 
-                <ImageView
+                <pl.droidsonroids.gif.GifImageView
+
                     android:id="@+id/imageView2"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -205,11 +210,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/line"
                 android:backgroundTint="#00000000"
                 android:orientation="horizontal">
 
-                <ImageView
+                <pl.droidsonroids.gif.GifImageView
+
                     android:id="@+id/imageView3"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -219,7 +224,8 @@
                     android:padding="20sp"
                     android:tag="3" />
 
-                <ImageView
+                <pl.droidsonroids.gif.GifImageView
+
                     android:id="@+id/imageView4"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -229,7 +235,8 @@
                     android:padding="20sp"
                     android:tag="4" />
 
-                <ImageView
+                <pl.droidsonroids.gif.GifImageView
+
                     android:id="@+id/imageView5"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -247,7 +254,8 @@
                 android:layout_weight="1"
                 android:orientation="horizontal">
 
-                <ImageView
+                <pl.droidsonroids.gif.GifImageView
+
                     android:id="@+id/imageView6"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -257,7 +265,8 @@
                     android:padding="20sp"
                     android:tag="6" />
 
-                <ImageView
+                <pl.droidsonroids.gif.GifImageView
+
                     android:id="@+id/imageView7"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -267,7 +276,8 @@
                     android:padding="20sp"
                     android:tag="7" />
 
-                <ImageView
+                <pl.droidsonroids.gif.GifImageView
+
                     android:id="@+id/imageView8"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -296,8 +306,8 @@
 
     <ImageButton
         android:id="@+id/mute_button"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
         android:layout_weight="1"
@@ -308,37 +318,59 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <LinearLayout
-        android:id="@+id/footer"
-        android:layout_width="0sp"
-        android:layout_height="0sp"
+    <ImageButton
 
-        android:orientation="horizontal"
+        android:id="@+id/restart_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16sp"
         android:layout_marginBottom="15sp"
+        android:background="@drawable/restartarrow"
+
+        android:contentDescription="@string/button_restart"
+        android:onClick="restartGame"
+        android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
+
         app:layout_constraintDimensionRatio="H,6:1"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent" />
 
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/header2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/mute_button"
+        app:layout_constraintTop_toTopOf="parent">
 
+        <pl.droidsonroids.gif.GifImageView
+            android:id="@+id/heart1"
+            android:layout_width="62dp"
+            android:layout_height="61dp"
+            app:srcCompat="@drawable/heart"/>
 
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1" />
+        <pl.droidsonroids.gif.GifImageView
+            android:id="@+id/heart2"
+            android:layout_width="62dp"
+            android:layout_height="61dp"
 
-        <ImageButton
-            android:id="@+id/restart_button"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginEnd="16sp"
-            android:layout_weight="1"
+            app:srcCompat="@drawable/heart" />
 
-            android:background="@drawable/restart2"
-            android:contentDescription="@string/button_restart"
-            android:onClick="restartGame" />
+        <pl.droidsonroids.gif.GifImageView
+            android:id="@+id/heart3"
+            android:layout_width="62dp"
+            android:layout_height="61dp"
+            app:srcCompat="@drawable/heart" />
+
+        <pl.droidsonroids.gif.GifImageView
+            android:id="@+id/heart4"
+            android:layout_width="62dp"
+            android:layout_height="61dp"
+            app:srcCompat="@drawable/heart" />
     </LinearLayout>
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

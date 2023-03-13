@@ -1,40 +1,35 @@
 <resources>
-    <string name="app_name">Scruffe_Alpha_test</string>
-    <string name="button_play">Play</string>
-    <string name="button_restart">Restart</string>
-    <string name="coins">coins</string>
-    <string name="top_l">top left</string>
-    <string name="top_m">top center</string>
-    <string name="top_r">top right</string>
-    <string name="mid_l">middle left</string>
-    <string name="mid_c">middle center </string>
-    <string name="mid_r">middle right</string>
-    <string name="bot_l">bottom left</string>
-    <string name="bot_c">bottom center</string>
-    <string name="bot_r">bottom right</string>
-    <string name="game_over">Game Over!</string>
-    <string name="match_draw">Match Draw</string>
-    <string name="first_turn_text">Ready?</string>
-    <string name="mute">mute audio</string>
-    <string name="placeholder_time">00</string>
-    <string name="title_activity_survival">Survival</string>
-    <string name="dummy_button">Dummy Button</string>
-    <string name="dummy_content">DUMMY\nCONTENT</string>
-    <string name="title_activity_suvival">suvival</string>
-    <!-- Strings used for fragments for navigation -->
-    <string name="first_fragment_label">First Fragment</string>
-    <string name="second_fragment_label">Second Fragment</string>
-    <string name="next">Next</string>
-    <string name="previous">Previous</string>
+    <string name="app_name" translatable="false">Pop Pop Pop</string>
+    <string name="button_play" translatable="false">Play</string>
+    <string name="button_restart" translatable="false">Restart</string>
 
-    <string name="hello_first_fragment">Hello first fragment</string>
-    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
-    <string name="score_text">1000</string>
-    <string name="highscore_text">2500</string>
-    <string name="ready">ready?</string>
-    <string name="score">SCORE</string>
-    <string name="highscore">HIGHSCORE</string>
-    <string name="gamemode"> </string>
+    <string name="game_box">play area</string>
+    <string name="top_l" translatable="false">A1</string>
+    <string name="top_m" translatable="false">A2</string>
+    <string name="top_r" translatable="false">A3</string>
+    <string name="mid_l" translatable="false">B1</string>
+    <string name="mid_c" translatable="false">B2</string>
+    <string name="mid_r" translatable="false">B3</string>
+    <string name="bot_l" translatable="false">C1</string>
+    <string name="bot_c" translatable="false">C2</string>
+    <string name="bot_r" translatable="false">C3</string>
+
+    <string name="game_over" translatable="false">Game Over!</string>
+    <string name="first_turn_text" translatable="false">Ready?</string>
+    <string name="mute">mute audio</string>
+
+    <string name="placeholder_time" translatable="false">60</string>
+
+    <string name="score_text" translatable="false">00</string>
+    <string name="highscore_text" translatable="false">000</string>
+
+    <string name="score" translatable="false">SCORE</string>
+    <string name="highscore" translatable="false">HIGHSCORE</string>
+    <string name="gamemode" translatable="false"> </string>
+    <string name="timer" translatable="false">TIMER</string>
+    <string name="survival" translatable="false">SURVIVAL</string>
+    <string name="gamemode_txt" translatable="false">TIMER </string>
+    <string name="lives_txt" translatable="false">Lives </string>
 
 
 </resources>
