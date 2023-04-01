@@ -5,14 +5,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg9">
+    android:background="@drawable/bg">
 
 
     <ImageView
         android:id="@+id/imageView12"
         android:layout_width="146dp"
         android:layout_height="87dp"
-        android:layout_marginEnd="75dp"
+        android:layout_marginEnd="100dp"
         android:layout_marginBottom="55dp"
         android:rotation="48"
         android:rotationY="-198"
@@ -29,7 +29,7 @@
         android:id="@+id/imageView13"
         android:layout_width="146dp"
         android:layout_height="87dp"
-        android:layout_marginEnd="75dp"
+        android:layout_marginEnd="100dp"
         android:layout_marginBottom="55dp"
         android:rotation="48"
         android:rotationY="-34"
@@ -49,7 +49,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="32dp"
         ads:adSize="MEDIUM_RECTANGLE"
-        ads:adUnitId="ca-app-pub-3940256099942544/6300978111"
+        ads:adUnitId="ca-app-pub-4596064278388573/4023266607"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -79,7 +79,7 @@
         android:layout_width="146dp"
         android:layout_height="87dp"
         android:layout_marginTop="60dp"
-        android:layout_marginEnd="75dp"
+        android:layout_marginEnd="100dp"
         android:rotation="48"
         android:rotationY="-198"
         android:scaleX="0.1"
@@ -96,7 +96,7 @@
         android:layout_width="146dp"
         android:layout_height="87dp"
         android:layout_marginTop="60dp"
-        android:layout_marginEnd="75dp"
+        android:layout_marginEnd="100dp"
         android:rotation="48"
         android:rotationY="-34"
         android:scaleX="0.1"

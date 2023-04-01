@@ -10,8 +10,8 @@ android {
         applicationId "com.scruffe.chasexo"
         minSdk 28
         targetSdk 33
-        versionCode 7
-        versionName "1.0.6"
+        versionCode 11
+        versionName "1.1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }

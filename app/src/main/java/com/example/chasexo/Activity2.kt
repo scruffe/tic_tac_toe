@@ -69,17 +69,16 @@ class Activity2 : AppCompatActivity() {
         gameMode = myIntent.getIntExtra("gameMode",2)
         status.text = resources.getString(R.string.first_turn_text)
         lives = resources.getInteger(R.integer.lives)
+        findViewById<ImageView>(R.id.heart1).setImageResource(heart)
+        findViewById<ImageView>(R.id.heart2).setImageResource(heart)
+
         startTimerText = java.lang.String.format(getString(R.string.gamemode_txt) + " " + getString(R.string.placeholder_time))
         highScoreCount = sharedPref.getInt("highScoreTimer", 0)
         if (gameMode == 2){
             highScoreCount = sharedPref.getInt("highScoreSurvival", 0)
-            startTimerText = "" //java.lang.String.format(getString(R.string.lives_txt) + " $lives")
-            findViewById<ImageView>(R.id.heart1).setImageResource(heart)
-            findViewById<ImageView>(R.id.heart2).setImageResource(heart)
+            startTimerText = "" //java.lang.String.format(getString(R.string.lives_txt) + " $lives"
         }
         timer.text = startTimerText
-
-
         highScore.text = java.lang.String.format("$highScoreCount")
         score.text = java.lang.String.format("$scoreCount")
     }
@@ -111,6 +110,9 @@ class Activity2 : AppCompatActivity() {
         }
         if (lives < 0){
             gameOver()
+            if (gameMode == 1){
+                countDownTimer.cancel()
+            }
             return
         }
         updateScore()
@@ -146,11 +148,6 @@ class Activity2 : AppCompatActivity() {
         if (gameMode==1){
             return
         }
-        //var x: Int = lives
-        //if (x < 0) {
-        //    x = 0
-        //}
-        //timer.text = java.lang.String.format(getString(R.string.lives_txt) + " $x")
     }
 
     fun playerTap(view: View){
@@ -226,26 +223,7 @@ class Activity2 : AppCompatActivity() {
             9 -> { //heart
 
                 popId = heartPop
-                playSound(lvlUp)
-                if (lives < 4){
-                    lives++
-                }
-                var heartId = 0
-                when (lives) {
-                    1 -> {
-                        heartId = R.id.heart1
-                    }
-                    2 -> {
-                        heartId = R.id.heart2
-                    }
-                    3 -> {
-                        heartId = R.id.heart3
-                    }
-                    4 -> {
-                        heartId = R.id.heart4
-                    }
-                }
-                findViewById<ImageView>(heartId).setImageResource(heart)
+                updateGainHearts()
             }
         }
         scoreCount++
@@ -258,13 +236,42 @@ class Activity2 : AppCompatActivity() {
         newImg(circle)
     }
 
+    private fun updateGainHearts() {
+        if (lives < 4){
+            lives++
+        }
+        playSound(lvlUp)
+        var heartId = 0
+        when (lives) {
+            1 -> {
+                heartId = R.id.heart1
+            }
+            2 -> {
+                heartId = R.id.heart2
+            }
+            3 -> {
+                heartId = R.id.heart3
+            }
+            4 -> {
+                heartId = R.id.heart4
+            }
+        }
+        findViewById<ImageView>(heartId).setImageResource(heart)
+    }
+
     private fun timerGameMode(gameStateId: Int, view: View) {
+        if (lives < 0) {
+            gameOver()
+            countDownTimer.cancel()
+            return
+        }
         if (counter == 0) {
             startTimerGame()
             return
         }
         if (pause) {
             gameOver()
+            countDownTimer.cancel()
             return
         }
         updateScore()
@@ -272,10 +279,7 @@ class Activity2 : AppCompatActivity() {
         var popId = bubblePop
         if (gameStateId == 0 && counter != 0) {
             playSound(R.raw.mis)
-            scoreCount--
-            if (scoreCount < 0) {
-                scoreCount = 0
-            }
+            missClick()
             return
         } else if (gameStateId == 1) {
             scoreCount++
@@ -284,7 +288,7 @@ class Activity2 : AppCompatActivity() {
         } else if (gameStateId == 9) {
             scoreCount += 5
             popId = R.drawable.heartpop
-            playSound(lvlUp)
+            updateGainHearts()
         }
         updateGame(popId, view)
 
@@ -300,6 +304,9 @@ class Activity2 : AppCompatActivity() {
         playSound(R.raw.lose2)
         status.text = java.lang.String.format(getString(R.string.game_over))
         saveHighScore()
+        if (gameMode == 1){
+            countDownTimer.cancel()
+        }
     }
 
     private fun startTimerGame() {
@@ -367,7 +374,7 @@ class Activity2 : AppCompatActivity() {
                 var pop = bubblePop
                 if (gameState[r]==9){
                     pop = heartPop}
-                view.setImageResource(pop)
+                view.setImageResource(0)
                 gameState[r] = 0
             }
         }
@@ -378,12 +385,12 @@ class Activity2 : AppCompatActivity() {
         if (gameMode==1){
             countDownTimer.cancel()
             pause = false
-        } else {
-            findViewById<ImageView>(R.id.heart1).setImageResource(heart)
-            findViewById<ImageView>(R.id.heart2).setImageResource(heart)
-            findViewById<ImageView>(R.id.heart3).setImageResource(0)
-            findViewById<ImageView>(R.id.heart4).setImageResource(0)
         }
+        findViewById<ImageView>(R.id.heart1).setImageResource(heart)
+        findViewById<ImageView>(R.id.heart2).setImageResource(heart)
+        findViewById<ImageView>(R.id.heart3).setImageResource(0)
+        findViewById<ImageView>(R.id.heart4).setImageResource(0)
+
         playSound(R.raw.restart2)
         scoreCount++
         saveHighScore()

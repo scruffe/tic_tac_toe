@@ -15,7 +15,7 @@
     <string name="bot_r" translatable="false">C3</string>
 
     <string name="game_over" translatable="false">Game Over!</string>
-    <string name="first_turn_text" translatable="false">Ready?</string>
+    <string name="first_turn_text" translatable="false">start</string>
     <string name="mute">mute audio</string>
 
     <string name="placeholder_time" translatable="false">60</string>
@@ -26,8 +26,8 @@
     <string name="score" translatable="false">SCORE</string>
     <string name="highscore" translatable="false">HIGHSCORE</string>
     <string name="gamemode" translatable="false"> </string>
-    <string name="timer" translatable="false">TIMER</string>
-    <string name="survival" translatable="false">SURVIVAL</string>
+    <string name="timer" translatable="false">60 seconds</string>
+    <string name="survival" translatable="false">Endless</string>
     <string name="gamemode_txt" translatable="false">TIMER </string>
     <string name="lives_txt" translatable="false">Lives </string>
 
